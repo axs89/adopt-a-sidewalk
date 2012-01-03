@@ -16,6 +16,22 @@ $(function() {
   var activeInfoWindow = new google.maps.InfoWindow({
     maxWidth: 350
   });
+
+  //code to initialize OhSoWe widget
+  //initialize widget
+  widget = new OhSoWe.MapWidget({
+    version: "0.1",
+    partnerId: "snowflake",
+    container: "osw_widget"
+  }).render();
+  console.debug('OhSoWe Widget initialized');
+  
+  //set the google maps listener
+  google.maps.event.addListener(map, 'bounds_changed', function() {
+    console.debug('bounds_changed');
+    widget.boundsChanged(map.getBounds().toUrlValue());
+  });
+
   
   bindInfoWindowLink( 'adopt_link', '/map_objects', 'POST', {}, {showIW: false} );
   bindInfoWindowLink( 'sign_in_link', '/users/sign_in', 'GET', {}, {showIW: false} );
