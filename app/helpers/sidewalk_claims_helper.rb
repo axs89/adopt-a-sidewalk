@@ -1,0 +1,2 @@
+module SidewalkClaimsHelper
+end

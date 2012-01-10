@@ -8,7 +8,7 @@ en:
     change_password: "Change my password"
     edit_profile: "Edit profile"
     email_password: "Email me my password"
-    find: "See my street"
+    find: "Find"
     continue: "Continue"
     send_reminder: "Send reminder to shovel"
     register: "Register now"
@@ -61,6 +61,8 @@ en:
     sign_out: "Sign Out"
     sign_in_short: "Sign In"
     sign_up_short: "Sign Up"
+    login: "Login"
+    register: "Register"
   notices:
     abandoned: "%{thing} abandoned!"
     adopted: "You just adopted a %{thing}!"

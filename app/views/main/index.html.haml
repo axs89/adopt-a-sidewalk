@@ -1,5 +1,14 @@
 #sidebar
-  %h1= image_tag "logos/asw_logo.png", :alt => t("titles.main", :thing => t("defaults.thing").titleize), :title => t("titles.main", :thing => t("defaults.thing").titleize)
+  = image_tag "logos/asw_logo.png", :alt => t("titles.main", :thing => t("defaults.thing").titleize), :title => t("titles.main", :thing => t("defaults.thing").titleize)
+  
+  - if user_signed_in?
+    #user_badge.font_1.link_1.center
+      Welcome
+      = current_user.fullname
+      [
+      = link_to t("links.sign_out"), destroy_user_session_path, :id => 'sign_out_link_main', :class => 'font_12'
+      ]
+      
   = render :partial => 'address_form'
 
   #info_box
@@ -7,33 +16,33 @@
       %div{:id => key}
         = message
 
-  #user_badge.font_1.link_1
-    - if user_signed_in?
-      Welcome
-      = current_user.fullname
-      = link_to t("links.sign_out"), destroy_user_session_path, :id => 'sign_out_link_main'
-    - else
-      = render :partial => 'sessions/sign_in'
-
-  #scrollup.font_1
-    %div.headline
-      "Adopt-a-sidewalk" near your home by "claiming" it on a map.
-      %br
-      %br
-      By doing this, you let neighbors know you can help clear snow.
-    %div.headline
-      You can see at-a-glance which sidewalks are claimed and connect with your less-abled neighbors to help keep their sidewalks clear.
-    %div.headline
-      You can enlist your friends to help on Facebook and Twitter.
-    %div.headline
-      To sign up for our text messaging service, text the word "Chicago" to "311311" for all major cell phone carriers.
-      %br
-      %br
-      Message and data rates may apply.
-    %div.headline
-      = image_tag "logos/ChicagoShovelsHOME.jpg"
-    %div.headline
-      = image_tag "logos/SignUpSMSAlerts.jpg"
+  .font_1
+    %p
+      Welcome to Chicago Shovel's Adopt-a-Sidewalk!
+    %p
+      You may know that you're required to shovel the sidewalk in front of your home or business,
+      but how about helping others out?
+    %p
+      Claim the sidewalks that you'll shovel this winter.
+      Share supplies like snowblowers, shovels and salt with your neighbors.
+      Ask for help if you need an extra hand this winter.
+      Let everyone know you've cleared your sidewalk.
+    %p
+      Don't see your sidewalk on this map?
+      Help add your sidewalk by letting us know here.
+    
+    %p
+      Sidewalk colors
+    %p
+      .needs_help= 'Needs help'
+      .cleared= 'Cleared'
+      .adopted= 'Adopted'
+      .unclear= 'Uncleared'
+    
+  = image_tag "logos/ChicagoShovelsHOME.jpg"
+  = image_tag "logos/SignUpSMSAlerts.jpg"
+  = image_tag "logos/SignUpSMSAlerts.jpg"
+  = image_tag "logos/SignUpSMSAlerts.jpg"
     
   #register
     %p#register-text
@@ -60,9 +69,9 @@
         = submit_tag t("buttons.sign_in")
       #login-fb
         %fb:login-button{:length => "long", :perms => "email", :onlogin => ""}
-  #social
-    = render :partial => 'facebook_button'
+  %ul.horizontal_items
     = render :partial => 'gplus_button'
+    = render :partial => 'facebook_button'
     = render :partial => 'twitter_button'
     
   #feedback
