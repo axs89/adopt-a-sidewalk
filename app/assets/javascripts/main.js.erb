@@ -23,16 +23,19 @@ $(function() {
   widget = new OhSoWe.MapWidget({
     version: "0.1",
     partnerId: "snowflake",
-    container: "osw_widget"
+    container: "osw_widget",
+    onReady: function(widget) {
+      //set the initial bounds
+      widget.boundsChanged(map.getBounds().toUrlValue());
+      //set the google maps listener
+      google.maps.event.addListener(map, 'bounds_changed', function() {
+        console.debug('bounds_changed');
+        widget.boundsChanged(map.getBounds().toUrlValue());
+      });
+    }
   }).render();
   console.debug('OhSoWe Widget initialized');
   
-  //set the google maps listener
-  google.maps.event.addListener(map, 'bounds_changed', function() {
-    console.debug('bounds_changed');
-    widget.boundsChanged(map.getBounds().toUrlValue());
-  });
-
   
   var fetchMapObject = function () {
     $.ajax({
